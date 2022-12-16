@@ -37,6 +37,11 @@ import { LocalAuthGuard } from './passport/local-auth.guard';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Get()
+  async testRoute() {
+    return 'hello';
+  }
+
   @Post('login')
   @UseGuards(LocalAuthGuard)
   @ApiOperation({ summary: 'Login using email and password' })

@@ -1,0 +1,22 @@
+import { Prisma } from '@prisma/client';
+import { IsOptional } from 'class-validator';
+
+export class Find{{name}}Dto {
+  @IsOptional()
+  skip?: number | undefined;
+
+  @IsOptional()
+  take?: number | undefined;
+
+  @IsOptional()
+  cursor?: Prisma.{{name}}WhereUniqueInput | undefined;
+
+  @IsOptional()
+  where?: Prisma.{{name}}WhereInput | undefined;
+
+  @IsOptional()
+  orderBy?: Prisma.{{name}}OrderByWithRelationInput | undefined;
+
+  @IsOptional()
+  include?: any;
+}

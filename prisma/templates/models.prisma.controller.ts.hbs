@@ -1,0 +1,51 @@
+import { Post, Body, Get, Param, Patch, Delete } from '@nestjs/common';
+
+import { {{name}}ServicePrisma } from './{{lower name}}.prisma.service';
+import { Create{{name}}Dto } from './dto/create-{{lower name}}.dto';
+import { {{name}} } from './entities/{{lower name}}.entity';
+import { Find{{name}}Dto } from './dto/find-{{lower name}}.dto';
+import { Update{{name}}Dto } from './dto/update-{{lower name}}.dto';
+import { ApiResponse } from '@nestjs/swagger';
+
+export class {{name}}ControllerPrisma {
+  constructor(private readonly {{lower name}}Service: {{name}}ServicePrisma) {}
+
+  @Post()
+  async create{{name}}(@Body() {{lower name}}Data: Create{{name}}Dto): Promise<{{name}}> {
+    return this.{{lower name}}Service.create{{name}}({{lower name}}Data);
+  }
+
+  @Patch()
+  async update{{name}}(@Body() {{lower name}}Data: Update{{name}}Dto): Promise<{{name}}> {
+    return this.{{lower name}}Service.update{{name}}({{lower name}}Data);
+  }
+
+  @Post('find')
+  async find{{name}}(@Body() filters: Find{{name}}Dto): Promise<{{name}}[]> {
+    return this.{{lower name}}Service.find{{name}}({ ...filters });
+  }
+
+  @ApiResponse({ type: {{name}} })
+  @Get(':id')
+  async get{{name}}ById(@Param('id') id: string): Promise<{{name}} | null> {
+    return this.{{lower name}}Service.getSingle{{name}}({ id: Number(id) });
+  }
+
+  @ApiResponse({ type: {{name}} })
+  @Delete(':id')
+  async delete{{name}}ById(@Param('id') id: string): Promise<{{name}} | null> {
+    return this.{{lower name}}Service.delete{{name}}({ id: Number(id) });
+  }
+
+  {{#each fields}}
+  {{#if this.isUnique}}
+  @ApiResponse({ type: {{@root.name}} })
+  @Get('by-{{this.name}}/:{{this.name}}')
+  async get{{@root.name}}By{{this.name}}(
+    @Param('{{this.name}}') {{this.name}}: string,
+  ): Promise<{{@root.name}} | null> {
+    return this.{{lower @root.name}}Service.getSingle{{@root.name}}({ {{this.name}} });
+  }
+  {{/if}}
+  {{/each}}
+}

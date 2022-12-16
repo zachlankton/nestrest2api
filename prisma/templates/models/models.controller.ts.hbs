@@ -1,0 +1,13 @@
+import { Controller } from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { {{name}}ControllerPrisma } from 'prisma/generated/{{lower name}}/{{lower name}}.prisma.controller';
+import { {{name}}ServicePrisma } from 'prisma/generated/{{lower name}}/{{lower name}}.prisma.service';
+
+@ApiBearerAuth()
+@ApiTags('{{name}}')
+@Controller('{{lower name}}')
+export class {{name}}Controller extends {{name}}ControllerPrisma {
+    constructor(private readonly {{lower name}}ServicePrisma: {{name}}ServicePrisma) {
+        super({{lower name}}ServicePrisma);
+    }
+}

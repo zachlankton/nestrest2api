@@ -1,0 +1,12 @@
+{{classValidatorImportFetch fields}}
+
+export class Fetch{{name}}Dto {
+  {{#each fields}}
+    {{#if (isWriteOnly this)}}
+    {{else}}
+  {{validators documentation}}
+  {{name}}{{optional this}}: {{getFetchType this}} {{~#unless (checkRequired this)}} | null{{/unless}};
+
+    {{/if}}
+  {{/each}}
+}

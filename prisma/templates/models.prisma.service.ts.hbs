@@ -1,0 +1,63 @@
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma.service';
+import { Prisma } from '@prisma/client';
+import { {{name}} } from './entities/{{lower name}}.entity';
+import { Create{{name}}Dto } from './dto/create-{{lower name}}.dto';
+import { PartialCreate{{name}}Dto } from './dto/update-{{lower name}}.dto';
+
+@Injectable()
+export class {{name}}ServicePrisma {
+  constructor(private prisma: PrismaService) {}
+
+  async getSingle{{name}}(
+    userWhereUniqueInput: Prisma.{{name}}WhereUniqueInput,
+    include?: any
+  ): Promise<{{name}} | null> {
+    return this.prisma.{{lower name}}.findUnique({
+      where: userWhereUniqueInput,
+      include
+    });
+  }
+
+  async find{{name}}(params: {
+    skip?: number;
+    take?: number;
+    cursor?: Prisma.{{name}}WhereUniqueInput;
+    where?: Prisma.{{name}}WhereInput;
+    orderBy?: Prisma.{{name}}OrderByWithRelationInput;
+    include?: any;
+  }): Promise<{{name}}[]> {
+    const { skip, take, cursor, where, orderBy, include } = params;
+    return this.prisma.{{lower name}}.findMany({
+      skip,
+      take,
+      cursor,
+      where,
+      orderBy,
+      include,
+    });
+  }
+
+  async create{{name}}(data: Create{{name}}Dto): Promise<{{name}}> {
+    return this.prisma.{{lower name}}.create({
+      data,
+    });
+  }
+
+  async update{{name}}(params: {
+    where: Prisma.{{name}}WhereUniqueInput;
+    data: PartialCreate{{name}}Dto;
+  }): Promise<{{name}}> {
+    const { where, data } = params;
+    return this.prisma.{{lower name}}.update({
+      data,
+      where,
+    });
+  }
+
+  async delete{{name}}(where: Prisma.{{name}}WhereUniqueInput): Promise<{{name}}> {
+    return this.prisma.{{lower name}}.delete({
+      where,
+    });
+  }
+}

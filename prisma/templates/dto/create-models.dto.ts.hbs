@@ -1,0 +1,13 @@
+{{classValidatorImport fields}}
+{{relationalTypes fields}}
+
+export class Create{{name}}Dto {
+  {{#each fields}}
+    {{#if (isIdOrReadOnly this)}}
+    {{else}}
+  {{validators documentation}}
+  {{name}}{{optional this}}: {{getType this}} {{~#unless (checkRequired this)}} | null{{/unless}};
+
+    {{/if}}
+  {{/each}}
+}

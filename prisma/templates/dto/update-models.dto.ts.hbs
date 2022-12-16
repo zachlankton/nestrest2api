@@ -1,0 +1,14 @@
+import { PartialType } from '@nestjs/swagger';
+import { Prisma } from '@prisma/client';
+import { IsDefined } from 'class-validator';
+import { Create{{name}}Dto } from './create-{{lower name}}.dto';
+
+export class PartialCreate{{name}}Dto extends PartialType(Create{{name}}Dto) {}
+
+export class Update{{name}}Dto {
+  @IsDefined()
+  where: Prisma.{{name}}WhereUniqueInput;
+
+  @IsDefined()
+  data: PartialCreate{{name}}Dto;
+}

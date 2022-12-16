@@ -1,0 +1,1 @@
+docker run -d -p 4000:80 --env DATABASE_URL="postgresql://nestrest2admin:mysecretpassword@172.17.0.2:5432/nestrest2?schema=public" zachlankton/nestrest

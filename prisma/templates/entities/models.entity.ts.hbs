@@ -1,0 +1,15 @@
+import { Fetch{{name}}Dto } from '../dto/fetch-{{lower name}}.dto';
+{{classValidatorImportEntity fields}}
+
+export class {{name}} extends Fetch{{name}}Dto {
+  id: number;
+  
+  {{#each fields}}
+  {{#if (isNotWriteOnly this)}}
+  {{else}}
+  {{validators documentation}}
+  {{name}}{{optional this}}: {{getFetchType this}} {{~#unless (checkRequired this)}} | null{{/unless}};
+  
+  {{/if}}
+  {{/each}}
+}
